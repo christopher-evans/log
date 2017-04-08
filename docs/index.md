@@ -83,12 +83,3 @@ $log->log(LogLevel::NOTICE, 'This message won\'t be added to the log');
 The simplest way to add a new target is to extend `Target\AbstractTarget` with an implementation of the `logString` method.  This method takes a pre-formatted string and should add this to the log.
  
  More complex behavior, such as filtering by data other than log level and time stamp of the log entry can be achieved by writing a `Target\TargetInterface` implementation that does not extend `Target\AbstractTarget`;
-
-
-## Outstanding work
-
-- Look at `Target\File` immutability issues
-
-- Consider replacing with a `Target\WritableStream`
-
-- Comment tests
