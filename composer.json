@@ -1,0 +1,45 @@
+{
+  "name": "west-php/log",
+  "type": "library",
+  "description": "PSR-3 log implementation",
+  "keywords": [
+    "psr-3",
+    "log"
+  ],
+  "homepage": "https://github.com/west-php/log",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Christopher Evans <c.m.evans@gmx.co.uk>"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.0",
+    "psr/log": "^1.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "West\\Log\\": "src/"
+    }
+  },
+  "provide": {
+    "psr/log-implementation": "^1.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.0.0",
+    "mikey179/vfsStream": "^1.6.4",
+    "phpmetrics/phpmetrics": "^2.0.0",
+    "phpbench/phpbench": "^1.0@dev"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "West\\Log\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit --coverage-html coverage",
+    "docs": "doxygen ./Doxyfile",
+    "metrics": "phpmetrics --report-html=./metrics ./src",
+    "benchmark": "phpbench run --report=all --output=html_output"
+  }
+}
