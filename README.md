@@ -16,7 +16,7 @@ This package requires PHP 7.1 or later; interfaces required by the package are
 documented in the [composer.json][] file.
 
 
-## Quality
+## Code Quality
 
 To run the unit tests and generate a coverage report with [PHPUnit][] run
 `composer install` followed by `composer test` at the command line.
@@ -57,34 +57,34 @@ and [Smalltalk][].  In particular:
 
   _Some exceptions are permitted, for example two objects encapsulating distinct URIs may point to the
   same resource without aggressive [URI normalization](https://en.wikipedia.org/wiki/URL_normalization)._
- 
- - An object is immutable
- 
+
+- An object is immutable
+
   _Various definitions of immutability can be contended, e.g. a file object representing a file in a
   mutable filesystem are considered mutable regardless of whether an changes to the file are visible through the object._
- 
- - A class name does not end in '-er'.
- 
+
+- A class name does not end in '-er'.
+
   _An object is a thing, and a class name described what objects of that class are, not what they do.
   Verbs are used for method names._
-  
- - There are no `null` values.
- 
+
+- There are no `null` values.
+
   _The special value `null` is not an instance of any class, and does not implement any (useful) interface. An object that does not
   implement the interfaces expected of it's fellow class members does not exist._
- 
- - A class does not have any static properties or methods.
-  
+
+- A class does not have any static properties or methods.
+
   _An application consists of objects interacting through interfaces, and classes are used to describe sets of objects, not
   to implement logic for those objects._
- 
- - A class is either abstract or final. Only abstract methods are protected.
-  
+
+- A class is either abstract or final. Only abstract methods are protected.
+
   _An object is the master of it's internal behavior, and works with other objects only through it's public interface. Extending a 'completed' class
   may break the logic of the parent class. Allowing abstract objects at all is a concession with which the author is increasingly unhappy._
 
- - Objects interact through interfaces. All public methods are defined by an interface.
- 
+- Objects interact through interfaces. All public methods are defined by an interface.
+
   _Objects judge objects based on what they do, not what they are.  A public method not documented by an interface would be redundant._
 
 
