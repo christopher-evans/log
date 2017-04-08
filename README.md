@@ -24,9 +24,6 @@ To run the unit tests and generate a coverage report with [PHPUnit][] run
 This package should comply with the recommendations set out in [PSR-1][], [PSR-2][]
 and [PSR-4][].
 
-
-## Benchmarks
-
 To run the benchmarks and generate a report with [PHPBench][] run `composer install`
 followed by `composer benchmark` at the command line.  For details about the
 reports see the the [composer.json][] file and the [PHPBenchDocs][].
@@ -46,19 +43,19 @@ described in David West's [Object Thinking][].  Many of the ideas
 come from [Yegor Bugayenko][]'s distillations of West's book, and [Alan Kay][]'s comments on [Squeak][]
 and [Smalltalk][].  In particular:
 
-- Everything is an object
+- Everything is an object.
 
   _Some exceptions are permitted, for example the introduction of resources, in part to compensate
   for the lack of OOP in earlier versions of the language, are allowed._
 
 - An object exists in real life.
 
-- An object is unique
+- An object is unique.
 
   _Some exceptions are permitted, for example two objects encapsulating distinct URIs may point to the
   same resource without aggressive [URI normalization](https://en.wikipedia.org/wiki/URL_normalization)._
 
-- An object is immutable
+- An object is immutable.
 
   _Various definitions of immutability can be contended, e.g. a file object representing a file in a
   mutable filesystem are considered mutable regardless of whether an changes to the file are visible through the object._
@@ -83,7 +80,7 @@ and [Smalltalk][].  In particular:
   _An object is the master of it's internal behavior, and works with other objects only through it's public interface. Extending a 'completed' class
   may break the logic of the parent class. Allowing abstract objects at all is a concession with which the author is increasingly unhappy._
 
-- Objects interact through interfaces. All public methods are defined by an interface.
+- Objects interact through interfaces.
 
   _Objects judge objects based on what they do, not what they are.  A public method not documented by an interface would be redundant._
 
