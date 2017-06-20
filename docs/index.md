@@ -78,7 +78,7 @@ $log->log(LogLevel::NOTICE, 'This message won\'t be added to the log');
 
 ## Adding log targets
 
-`West\Log` provides the `Target\File` log target; other targets can be defined by the user.  This can be any class implementing `Target\TargetInterface`.
+`West\Log` provides the `Target\File` and `Target\Udp` log targets; other targets can be defined by the user.  This can be any class implementing `Target\TargetInterface`.
 
 The simplest way to add a new target is to extend `Target\AbstractTarget` with an implementation of the `logString` method.  This method takes a pre-formatted string and should add this to the log.
  

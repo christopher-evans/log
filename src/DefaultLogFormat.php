@@ -46,7 +46,7 @@ final class DefaultLogFormat implements LogFormatInterface
     private static $contextStringRegex = '/[^a-z0-9_\.]/i';
 
     /**
-     * DefaultLogFormat constructor.
+     * @brief DefaultLogFormat constructor.
      *
      * @param string $dateFormat Date format
      * @param string $lineSeparator Line separator
@@ -67,7 +67,7 @@ final class DefaultLogFormat implements LogFormatInterface
     }
 
     /**
-     * Replaces placeholders in the log message with values
+     * @brief Replaces placeholders in the log message with values
      * from the context array.
      *
      * @param string $message %Log message

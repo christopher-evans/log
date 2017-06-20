@@ -32,8 +32,8 @@ class MinLevelFilterTest extends TestCase
     }
 
     /**
-     * @param string $filterLevel String to be sluggified
-     * @param string $logLevel What we expect our slug result to be
+     * @param string $filterLevel Filter minimum level
+     * @param string $logLevel %log level
      *
      * @dataProvider providerTestLevelPasses
      */

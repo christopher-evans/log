@@ -6,8 +6,8 @@ A [PSR-3][] log implementation supporting multiple log targets.
 ## Autoloading
 
 This package is [PSR-4][] autoloadable via composer or otherwise mapping the `West\Log`
-namespace to the `src/` directory.  To run the tests and benchmarks the `West\Log`
-namespace should map to the `tests/` and `benchmarks/` directories respectively.
+namespace to the `src/` directory.  To run the tests the `West\Log` namespace should map
+to the `tests/` directory.
 
 
 ## Dependencies
@@ -78,7 +78,7 @@ and [Smalltalk][].  In particular:
 - A class is either abstract or final. Only abstract methods are protected.
 
   _An object is the master of it's internal behavior, and works with other objects only through it's public interface. Extending a 'completed' class
-  may break the logic of the parent class. Allowing abstract objects at all is a concession with which the author is increasingly unhappy._
+  may break the logic of the parent class. Allowing abstract classes at all is a concession with which the author is increasingly unhappy._
 
 - Objects interact through interfaces.
 
@@ -94,7 +94,6 @@ and [Smalltalk][].  In particular:
 [PHPUnit]: http://phpunit.de/
 [PHPBench]: https://github.com/phpbench/phpbench
 [PHPBenchDocs]: http://phpbench.readthedocs.io/en/latest/
-[west-php/log]: https://packagist.org/packages/aura/di
 [composer.json]: ./composer.json
 [Object Thinking]: http://davewest.us/product/object-thinking/
 [Yegor Bugayenko]: http://www.yegor256.com/
