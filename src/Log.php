@@ -10,19 +10,16 @@
 
 namespace West\Log;
 
-use Psr\Log\AbstractLogger;
 use West\Log\Exception\InvalidArgumentException;
 
 /**
  * @brief %Log container piping data to multiple targets.
  *
- * @details Implements the PSR-3 logger interface.
- *
  * @author Christopher Evans <c.m.evans@gmx.co.uk>
  * @see http://www.php-fig.org/psr/psr-3/
  * @date 17 March 2017
  */
-final class Log extends AbstractLogger
+final class Log implements LogInterface
 {
     /**
      * @brief %Log targets
@@ -53,17 +50,11 @@ final class Log extends AbstractLogger
     }
 
     /**
-     * Logs with an arbitrary level.
-     *
-     * @param string $level %Log level
-     * @param string $message %Log message
-     * @param array $context %Variables to be interpolated as defined in the
-     * @param int|null $time %Time stamp to log.  If null will be provded by PHP time() at the start of the method call.
-     * PSR-3 specification
+     * @see West::Log::LogInterface::log
      */
-    public function log($level, $message, array $context = [], $time = null)
+    public function log($level, $message, array $context = [], $time = 0)
     {
-        if (null === $time) {
+        if (0 === $time) {
             $time = time();
         }
 

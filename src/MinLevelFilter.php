@@ -83,21 +83,21 @@ final class MinLevelFilter implements FilterInterface
     private function getLevelOrder(string $level)
     {
         switch ($level) {
-            case LogLevel::DEBUG:
+            case 'debug':
                 return 0;
-            case LogLevel::INFO:
+            case 'info':
                 return 1;
-            case LogLevel::NOTICE:
+            case 'notice':
                 return 2;
-            case LogLevel::WARNING:
+            case 'warning':
                 return 3;
-            case LogLevel::ERROR:
+            case 'error':
                 return 4;
-            case LogLevel::CRITICAL:
+            case 'critical':
                 return 5;
-            case LogLevel::ALERT:
+            case 'alert':
                 return 6;
-            case LogLevel::EMERGENCY:
+            case 'emergency':
                 return 7;
         }
 

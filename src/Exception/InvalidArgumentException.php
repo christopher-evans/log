@@ -10,7 +10,7 @@
 
 namespace West\Log\Exception;
 
-use Psr\Log\InvalidArgumentException as PsrInvalidArgumentException;
+use InvalidArgumentException as RootInvalidArgumentException;
 
 /**
  * @brief Invalid argument exception for West::Log namespace
@@ -21,11 +21,12 @@ use Psr\Log\InvalidArgumentException as PsrInvalidArgumentException;
  *
  * @author Christopher Evans <c.m.evans@gmx.co.uk>
  *
- * @see http://www.php-fig.org/psr/psr-3/ Psr::Log::InvalidArgumentException
+ * @see http://php.net/manual/en/class.invalidargumentexception.php \InvalidArgumentException
  *
- * @date 18 March 2017
+ * @since 18 March 2017
+ * @updated 16 July 2017
  */
-class InvalidArgumentException extends PsrInvalidArgumentException
+class InvalidArgumentException extends RootInvalidArgumentException
 {
 
 }
