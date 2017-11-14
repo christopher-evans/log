@@ -1,6 +1,6 @@
-# West\\Log
+# West PHP Log
 
-A PHP log implementation supporting multiple log targets.
+A php logger supporting multiple log targets.
 
 
 ## Getting started
@@ -10,23 +10,42 @@ A new logger is constructed as follows:
 ```php
 namespace West\Log;
 
-use Psr\Log\LogLevel;
+// log format
+$format = new ServerFormat(\DateTime::W3C, "\n");
 
-// include vendor/autoload.php
-
-$logFormat = new DefaultLogFormat('Y-m-d H:i:s', PHP_EOL);
-$targets = [
-    new Target\File(__DIR__ . '/example.log', $logFormat)
+// log levels
+$logLevels = [
+    'debug' => 0,
+    'info' => 1,
+    'notice' => 2,
+    'warning' => 3,
+    'error' => 4,
+    'critical' => 5,
+    'alert' => 6,
+    'emergency' => 7
 ];
 
-$log = new Log($targets);
-$log->log(
-    'emergency',
-    'Here is a message with {context}',
-    [
-        'context' => 'context'
-    ]
-);
+// log filter -- entries less than 'warning' are ignored
+$filter = new MinLevelFilter($logLevels, 'warning');
+
+// delimiters containing string parameters
+$expansion = new StringExpansion('{', '}');
+
+// write to a file
+$target = new Target\File('test.log');
+
+// add the file target to the log stack
+$notifications = [
+    new DefaultNotification(
+        $target,
+        $expansion,
+        $format,
+        $filter
+    )
+];
+
+// create the log
+$log = new AggregateLog($notifications);
 ```
 
 Note that no validation is done on the log level, so it is up to the user to ensure a log level from a defined set is
@@ -35,46 +54,57 @@ passed to the `log` method.
 
 ## Changing the log format
 
-A log entry is formatted by a `LogFormatInterface` instance passed to the log target. In particular different targets
-may use different formats.  The [PSR-3 specification](http://www.php-fig.org/psr/psr-3/) places restrictions on log
-formatting that we adhere to in this package.
+A log entry is formatted by a `Format` instance passed to a notification. In particular different targets
+may use different formats.
 
-The `DefaultLogFormat` class is the only implementation provided in `West\Log`.
+The `ServerFormat` class is the only implementation provided as an example in this package.
 
 
 ## Filtering log entries
 
-A filter can passed to each target to determine which levels and time stamps are logged for a given target.  A filter
-must implement `FilterInterface`.
-
-The `MinLevelFilter` class is provided as an example, which will only log entries above a given severity for the usual
-set of log levels: 'emergency', 'alert', 'critical', 'error', 'warning', 'info', 'notice', 'debug'.
+A `Filter` can passed to each notification to determine which levels and time stamps are logged for a given target. The
+`LevelFilter` class is provided as an example. With the `Log` constructed above:
  
 ```php
-namespace West\Log;
+$log->log('emergency', 'This message will be added to the log');
+$log->log('notice', 'This message will not be added to the log');
+```
 
-use Psr\Log\LogLevel;
+A `PipeFilter` is provided, which allows through all log entries.
 
-// include vendor/autoload.php
 
-$logFormat = new DefaultLogFormat('Y-m-d H:i:s', PHP_EOL);
-$filter = new MinLevelFilter('warning');
-$targets = [
-    new Target\File(__DIR__ . '/example.log', $logFormat, $filter)
+## Serializing context parameters
+
+An `Expansion` can be passed to each notification to serialize objects in the logged string. Using the `StringExpansion`
+in the example above `$expansion = new StringExpansion('{', '}')` objects will be mapped to strings by casting. 
+For example:
+
+```php
+$context = [
+    'world' => 'WORLD'
 ];
 
-$log->log('emergency', 'This message will be added to the log');
-$log->log('notice', 'This message won\'t be added to the log');
+// sends 'hello WORLD' to the log
+$log->log('emergency', 'hello {world}', $context);
 ```
+
+For templated log messages this allows for passing e.g. a string identifier for the template as the log message and
+template variables for the context parameter.
 
 
 ## Adding log targets
 
-`West\Log` provides the `Target\File` and `Target\Udp` log targets; other targets can be defined by the user.  This can
-be any class implementing `Target\TargetInterface`.
+The provides the `OutputStreamTarget` and `UdpTarget` log targets; other targets can be defined by the user.  This can
+be any class implementing the `Target` interface.
 
-The simplest way to add a new target is to extend `Target\AbstractTarget` with an implementation of the `logString`
-method.  This method takes a pre-formatted string and should add this to the log.
- 
- More complex behavior, such as filtering by data other than log level and time stamp of the log entry can be achieved
- by writing a `Target\TargetInterface` implementation that does not extend `Target\AbstractTarget`;
+A target receives a formatted and expanded string and adds add it to the log.
+
+
+## Log Time
+
+In all the examples above the log format received the current time before formatting.  A log entry can be added for any
+specific time:
+
+```php
+$log->log('notice', 'hello world', [], new \DateTime('2000-01-01'));
+```

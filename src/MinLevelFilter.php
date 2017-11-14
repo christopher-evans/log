@@ -2,7 +2,7 @@
 /*
  * This file is part of the West\\Log package
  *
- * (c) Chris Evans <c.m.evans@gmx.co.uk>
+ * (c) Chris Evans <cmevans@tutanota.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,59 +10,54 @@
 
 namespace West\Log;
 
-use Psr\Log\LogLevel;
-use West\Log\Exception\InvalidArgumentException;
-
 /**
- * @brief Filter that passes only log levels above a
- * certain severity.
+ * @brief Filter that passes only log levels above a certain severity.
  *
- * %Log level severity, in descending order is defined
- * to be:
+ * @details <p>
+ * Severity is defined by an associative array mapping levels to integers.
+ * </p>
  *
- * - 'emergency'
- * - 'alert'
- * - 'critical'
- * - 'error'
- * - 'warning'
- * - 'info'
- * - 'notice'
- * - 'debug'
+ * <p>
+ * For example if the map defines: <code>['debug' => 0, 'error' => 1]</code> and the minimum level is
+ * <code>'error'</code> then only <code>'debug'</code> log entries will fail the filter.
+ * </p>
  *
- * For example if
- * ```javascript
- * $filter = new \West\Log\MinLevelFilter('critical');
- * ```
- * then levels 'critical', 'alert' and 'emergency' will
- * pass.
- *
- * @author Christopher Evans <c.m.evans@gmx.co.uk>
- * @see FilterInterface
- * @date 17 March 2017
+ * @author Christopher Evans <cmevans@tutanota.com>
+ * @see Filter
+ * @date 13 November 2017
  */
-final class MinLevelFilter implements FilterInterface
+final class MinLevelFilter implements Filter
 {
     /**
-     * @brief Minimum log level that will pass the filter
+     * @brief Minimum severity that passes the filter
      *
      * @var int $minLevelOrder
      */
     private $minLevelOrder;
 
     /**
+     * @brief Map from log levels to severity
+     *
+     * @var array $levelOrder
+     */
+    private $levelOrder;
+
+    /**
      * MinLevelFilter constructor.
      *
+     * @param array $levelOrder Map from log levels to severity
      * @param string $minLevel Minimum log level that will pass the filter
      */
-    public function __construct(string $minLevel)
+    public function __construct(array $levelOrder, string $minLevel)
     {
+        $this->levelOrder = $levelOrder;
         $this->minLevelOrder = $this->getLevelOrder($minLevel);
     }
 
     /**
-     * @see FilterInterface::filter
+     * @see Filter::filter
      */
-    public function filter(string $level, int $time): bool
+    public function filter(string $level, \DateTimeInterface $time): bool
     {
         $levelOrder = $this->getLevelOrder($level);
 
@@ -72,8 +67,6 @@ final class MinLevelFilter implements FilterInterface
     /**
      * @brief Map a log level to an integer indicating severity.
      *
-     * Defines an order on the set of log levels for comparison.
-     *
      * @param string $level %Log level
      *
      * @return int Severity of log level
@@ -82,25 +75,10 @@ final class MinLevelFilter implements FilterInterface
      */
     private function getLevelOrder(string $level)
     {
-        switch ($level) {
-            case 'debug':
-                return 0;
-            case 'info':
-                return 1;
-            case 'notice':
-                return 2;
-            case 'warning':
-                return 3;
-            case 'error':
-                return 4;
-            case 'critical':
-                return 5;
-            case 'alert':
-                return 6;
-            case 'emergency':
-                return 7;
+        if (! array_key_exists($level, $this->levelOrder)) {
+            throw new Exception\InvalidArgumentException(sprintf('Invalid log level %s', $level));
         }
 
-        throw new InvalidArgumentException(sprintf('Invalid log level %s', $level));
+        return $this->levelOrder[$level];
     }
 }

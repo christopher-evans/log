@@ -1,7 +1,4 @@
-# West\\Log
-
-A [PSR-3][] log implementation supporting multiple log targets.
-
+# West Log
 
 ## Autoloading
 
@@ -12,7 +9,7 @@ to the `tests/` directory.
 
 ## Dependencies
 
-This package requires PHP 7.1 or later; interfaces required by the package are
+This package requires PHP 7.0 or later; interfaces required by the package are
 documented in the [composer.json][] file.
 
 
@@ -50,25 +47,32 @@ and [Smalltalk][].  In particular:
 
 - An object exists in real life.
 
+- Objects interact through interfaces.
+
+  _Objects judge objects based on what they do, not what they are.  A public method not documented by an interface would
+  be redundant._
+
 - An object is unique.
 
-  _Some exceptions are permitted, for example two objects encapsulating distinct URIs may point to the
-  same resource without aggressive [URI normalization](https://en.wikipedia.org/wiki/URL_normalization)._
+  _Some exceptions are permitted, for example two objects encapsulating distinct URIs may point to the same resource
+  without aggressive [URI normalization](https://en.wikipedia.org/wiki/URL_normalization)._
 
 - An object is immutable.
 
-  _Various definitions of immutability can be contended, e.g. a file object representing a file in a
-  mutable filesystem are considered mutable regardless of whether an changes to the file are visible through the object._
+  _Various definitions of immutability can be contended, e.g. a file object representing a file in a mutable filesystem
+  is considered mutable regardless of whether an changes to the file are visible through the object._
 
 - A class name does not end in '-er'.
 
-  _An object is a thing, and a class name described what objects of that class are, not what they do.
-  Verbs are used for method names._
+  _An object is a thing, and a class name described what objects of that class are, not what they do. Verbs are used for
+  method names._
 
 - There are no `null` values.
 
-  _The special value `null` is not an instance of any class, and does not implement any (useful) interface. An object that does not
-  implement the interfaces expected of it's fellow class members does not exist._
+  _The special value `null` is not an instance of any class, and does not implement any (useful) interface. An object
+  that does not implement the interfaces expected of it's fellow class members does not exist.  One exception is
+  permitted: PHP only allows null to be used as the default value for an argument type-hinted as a class; in this case
+  a null default value may be used.  This allows multiple method signatures without duplicating code._
 
 - A class does not have any static properties or methods.
 
@@ -77,24 +81,19 @@ and [Smalltalk][].  In particular:
 
 - A class is either abstract or final. Only abstract methods are protected.
 
-  _An object is the master of it's internal behavior, and works with other objects only through it's public interface. Extending a 'completed' class
-  may break the logic of the parent class. Allowing abstract classes at all is a concession with which the author is increasingly unhappy._
+  _An object manages it's own internal behavior, and works with other objects only through it's public interface.
+  Extending a 'completed' class may break the logic of the parent class. Abstract classes themselves are normally
+  avoided.
 
-- Objects interact through interfaces.
+- No getters and setters.
 
-  _Objects judge objects based on what they do, not what they are.  A public method not documented by an interface would be redundant._
+  _Objects are defined bey their behavior, not by their attributes.  Getters and setters are a shallow way of imitating
+  data-based design as if it were a behavior of an object._
 
 
-[PSR-1]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
-[PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
-[PSR-3]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
-[PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
-[Composer]: http://getcomposer.org/
-[Doxygen]: http://www.stack.nl/~dimitri/doxygen/
-[PHPUnit]: http://phpunit.de/
-[PHPBench]: https://github.com/phpbench/phpbench
-[PHPBenchDocs]: http://phpbench.readthedocs.io/en/latest/
-[composer.json]: ./composer.json
+[JDK 1.8]: http://www.oracle.com/technetwork/java/javase/overview/index.html
+[JUnit 4]: http://junit.org/junit4/
+[PMD]: https://pmd.github.io/
 [Object Thinking]: http://davewest.us/product/object-thinking/
 [Yegor Bugayenko]: http://www.yegor256.com/
 [Alan Kay]: https://en.wikipedia.org/wiki/Alan_Kay/

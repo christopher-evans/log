@@ -6,7 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamFile;
 use Psr\Log\LogLevel;
-use West\Log\DefaultLogFormat;
+use West\Log\ServerFormat;
 use West\Log\Exception\InvalidArgumentException;
 use West\Log\Target\File as FileTarget;
 use PHPUnit\Framework\TestCase;
@@ -20,7 +20,7 @@ class FileTest extends TestCase
     /** @var $root vfsStreamFile Log file */
     private $logFile;
 
-    /** @var $logFormat DefaultLogFormat Log format */
+    /** @var $logFormat ServerFormat Log format */
     private $logFormat;
 
     /** @var $logTime int Log time */
@@ -30,7 +30,7 @@ class FileTest extends TestCase
     {
         $this->root = vfsStream::setup('test-directory');
         $this->logFile = vfsStream::newFile('test-directory/test.log');
-        $this->logFormat = new DefaultLogFormat(DateTime::ISO8601, PHP_EOL);
+        $this->logFormat = new ServerFormat(DateTime::ISO8601, PHP_EOL);
         $this->logTime = time();
     }
 

@@ -2,7 +2,7 @@
 /*
  * This file is part of the West\\Log package
  *
- * (c) Chris Evans <c.m.evans@gmx.co.uk>
+ * (c) Chris Evans <cmevans@tutanota.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,17 +11,30 @@
 namespace West\Log\Target;
 
 use West\Log\Exception\InvalidArgumentException;
-use West\Log\FilterInterface;
-use West\Log\LogFormatInterface;
+use West\Log\Exception\SocketException;
 
 /**
- * @brief %Log target that sends data to a UDP server.
+ * @brief %Log target that sends data to a UDP socket.
  *
- * @author Christopher Evans <c.m.evans@gmx.co.uk>
+ * @TODO move socket_create outside this class
+ * @details
+ * <p>
+ * For example:
+ * <pre>
+ *     <code>
+ *         $ipAddress = '127.0.0.1';
+ *         $port = 40;
+ *
+ *         $udpTarget = new UdpTarget($ipAddress, $port);
+ *     </code>
+ * </pre>
+ * </p>
+ *
+ * @author Christopher Evans <cmevans@tutanota.com>
  * @see AbstractTarget
  * @date 17 March 2017
  */
-final class Udp extends AbstractTarget
+final class Udp implements Target
 {
     /**
      * @brief UDP socket.
@@ -49,15 +62,11 @@ final class Udp extends AbstractTarget
      *
      * @param string $ipAddress IP Address
      * @param int $port Port
-     * @param LogFormatInterface $logFormat %Log format
-     * @param FilterInterface|null $filter %Log level filter
      *
      * @throws InvalidArgumentException
      */
-    public function __construct(string $ipAddress, int $port, LogFormatInterface $logFormat, FilterInterface $filter = null)
+    public function __construct(string $ipAddress, int $port)
     {
-        parent::__construct($logFormat, $filter);
-
         // validate IP address
         if (! filter_var($ipAddress, FILTER_VALIDATE_IP)) {
             throw new InvalidArgumentException(sprintf('Invalid IP address: %s', $ipAddress));
@@ -71,10 +80,7 @@ final class Udp extends AbstractTarget
         // create socket
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         if ($socket === false) {
-            $errorCode = socket_last_error();
-            $errorMessage = socket_strerror($errorCode);
-
-            throw new InvalidArgumentException(sprintf('Unable to create socket: %s', $errorMessage));
+            throw new SocketException('Unable to create socket');
         }
 
         $this->ipAddress = $ipAddress;
@@ -83,10 +89,21 @@ final class Udp extends AbstractTarget
     }
 
     /**
-     * @see AbstractTarget::logString
+     * @see Target::emit
      */
-    protected function logString(string $message)
+    public function emit(string $message)
     {
-        socket_sendto($this->socket, $message, mb_strlen($message), MSG_EOR, $this->ipAddress, $this->port);
+        $bytes = socket_sendto(
+            $this->socket,
+            $message,
+            mb_strlen($message),
+            MSG_EOR,
+            $this->ipAddress,
+            $this->port
+        );
+
+        if ($bytes === false) {
+            throw new SocketException('Error writing to socket');
+        }
     }
 }

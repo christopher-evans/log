@@ -3,7 +3,7 @@
 namespace West\Log\Target;
 
 use Psr\Log\LogLevel;
-use West\Log\DefaultLogFormat;
+use West\Log\ServerFormat;
 use West\Log\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use DateTime;
@@ -11,7 +11,7 @@ use West\Log\UdpServer;
 
 class UdpTest extends TestCase
 {
-    /** @var $logFormat DefaultLogFormat Log format */
+    /** @var $logFormat ServerFormat Log format */
     private $logFormat;
 
     /** @var $logTime int Log time */
@@ -19,7 +19,7 @@ class UdpTest extends TestCase
 
     public function setUp()
     {
-        $this->logFormat = new DefaultLogFormat(DateTime::ISO8601, PHP_EOL);
+        $this->logFormat = new ServerFormat(DateTime::ISO8601, PHP_EOL);
         $this->logTime = time();
     }
 

@@ -2,7 +2,7 @@
 /*
  * This file is part of the West\\Uri package
  *
- * (c) Chris Evans <c.m.evans@gmx.co.uk>
+ * (c) Chris Evans <cmevans@tutanota.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,7 +10,6 @@
 
 namespace West\Log;
 
-use Psr\Log\LogLevel;
 use West\Log\Target\File;
 use West\Log\Target\Udp;
 
@@ -22,20 +21,8 @@ use West\Log\Target\Udp;
  */
 class LogTargetBench
 {
-    /** @var $defaultLogFormat DefaultLogFormat Log format */
-    private $defaultLogFormat;
-
-    /** @var $logLevel string Log level */
-    private $logLevel;
-
     /** @var $logMessage string Log message */
     private $logMessage;
-
-    /** @var $context array Context array */
-    private $context;
-
-    /** @var $time int Time */
-    private $time;
 
     /** @var $fileTarget File File target */
     private $fileTarget;
@@ -45,26 +32,19 @@ class LogTargetBench
 
     public function setUp()
     {
-        $this->defaultLogFormat = new DefaultLogFormat('Y-m-s H:i:s', PHP_EOL);
-        $this->logLevel = LogLevel::ALERT;
         $this->logMessage = 'Log message';
-        $this->context = [];
-        $this->time = time();
 
-        $this->fileTarget = new File(
-            sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'bench.log',
-            $this->defaultLogFormat
-        );
-        $this->udpTarget = new Udp('127.0.0.1', 40, $this->defaultLogFormat);
+        $this->fileTarget = new File(sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'bench.log');
+        $this->udpTarget = new Udp('127.0.0.1', 40);
     }
 
     public function benchFileTarget()
     {
-        $this->fileTarget->log($this->time, $this->logLevel, $this->logMessage, $this->context);
+        $this->fileTarget->emit($this->logMessage);
     }
 
     public function benchUdpTarget()
     {
-        $this->udpTarget->log($this->time, $this->logLevel, $this->logMessage, $this->context);
+        $this->udpTarget->emit($this->logMessage);
     }
 }

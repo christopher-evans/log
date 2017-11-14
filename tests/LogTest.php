@@ -18,17 +18,17 @@ class LogTest extends TestCase
     /** @var $root vfsStreamFile Log file */
     private $logFile;
 
-    /** @var $logFormat DefaultLogFormat Log format */
+    /** @var $logFormat ServerFormat Log format */
     private $logFormat;
 
-    /** @var $filter FilterInterface Filter */
+    /** @var $filter Filter Filter */
     private $filter;
 
     public function setUp()
     {
         $this->root = vfsStream::setup('test-directory');
         $this->logFile = vfsStream::newFile('test-directory/test.log');
-        $this->logFormat = new DefaultLogFormat(DateTime::ISO8601, PHP_EOL);
+        $this->logFormat = new ServerFormat(DateTime::ISO8601, PHP_EOL);
         $this->filter = new MinLevelFilter(LogLevel::WARNING);
     }
 
@@ -40,7 +40,7 @@ class LogTest extends TestCase
             new \stdClass()
         ];
 
-        new Log($targets);
+        new AggregateLog($targets);
     }
 
     public function testLogFilter()
@@ -49,7 +49,7 @@ class LogTest extends TestCase
             new Target\File($this->logFile->url(), $this->logFormat, $this->filter)
         ];
 
-        $log = new Log($targets);
+        $log = new AggregateLog($targets);
         $log->log(
             LogLevel::NOTICE,
             'Here is a message with {context}',

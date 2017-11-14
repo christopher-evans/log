@@ -2,15 +2,13 @@
 /*
  * This file is part of the West\\Uri package
  *
- * (c) Chris Evans <c.m.evans@gmx.co.uk>
+ * (c) Chris Evans <cmevans@tutanota.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
 namespace West\Log;
-
-use Psr\Log\LogLevel;
 
 /**
  * @Revs({1, 8, 64, 4096})
@@ -20,7 +18,7 @@ use Psr\Log\LogLevel;
  */
 class DefaultLogFormatBench
 {
-    /** @var $defaultLogFormat DefaultLogFormat Log format */
+    /** @var $defaultLogFormat ServerFormat Log format */
     private $defaultLogFormat;
 
     /** @var $logLevel string Log level */
@@ -32,27 +30,26 @@ class DefaultLogFormatBench
     /** @var $context array Context array */
     private $context;
 
-    /** @var $time int Time */
+    /** @var $time \DateTimeInterface Time */
     private $time;
 
     public function setUp()
     {
-        $this->defaultLogFormat = new DefaultLogFormat('Y-m-s H:i:s', PHP_EOL);
-        $this->logLevel = LogLevel::ALERT;
+        $this->defaultLogFormat = new ServerFormat('Y-m-s H:i:s', PHP_EOL);
+        $this->logLevel = 'alert';
         $this->logMessage = 'Log message';
         $this->context = [
             'context' => 'Context'
         ];
-        $this->time = time();
+        $this->time = new \DateTimeImmutable();
     }
 
     public function benchFormat()
     {
         $this->defaultLogFormat->format(
-            $this->time,
             $this->logLevel,
             $this->logMessage,
-            $this->context
+            $this->time
         );
     }
 }

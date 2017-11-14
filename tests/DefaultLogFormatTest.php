@@ -13,7 +13,7 @@ class DefaultLogFormatTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $logFormat = new DefaultLogFormat(DateTime::ISO8601, PHP_EOL);
+        $logFormat = new ServerFormat(DateTime::ISO8601, PHP_EOL);
 
         $time = time();
 
@@ -29,7 +29,7 @@ class DefaultLogFormatTest extends TestCase
 
     public function testInterpolation()
     {
-        $logFormat = new DefaultLogFormat(DateTime::ISO8601, PHP_EOL);
+        $logFormat = new ServerFormat(DateTime::ISO8601, PHP_EOL);
 
         $time = time();
 
@@ -55,7 +55,7 @@ class DefaultLogFormatTest extends TestCase
 
     public function testNoInterpolation()
     {
-        $logFormat = new DefaultLogFormat(DateTime::ISO8601, PHP_EOL);
+        $logFormat = new ServerFormat(DateTime::ISO8601, PHP_EOL);
 
         $time = time();
 
