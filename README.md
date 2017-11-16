@@ -91,8 +91,16 @@ and [Smalltalk][].  In particular:
   data-based design as if it were a behavior of an object._
 
 
-[JDK 1.8]: http://www.oracle.com/technetwork/java/javase/overview/index.html
-[JUnit 4]: http://junit.org/junit4/
+[PSR-1]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
+[PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
+[PSR-3]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
+[PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
+[Composer]: http://getcomposer.org/
+[Doxygen]: http://www.stack.nl/~dimitri/doxygen/
+[PHPUnit]: http://phpunit.de/
+[PHPBench]: https://github.com/phpbench/phpbench
+[PHPBenchDocs]: http://phpbench.readthedocs.io/en/latest/
+[composer.json]: ./composer.json
 [PMD]: https://pmd.github.io/
 [Object Thinking]: http://davewest.us/product/object-thinking/
 [Yegor Bugayenko]: http://www.yegor256.com/
