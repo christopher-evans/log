@@ -11,21 +11,28 @@
 namespace West\Log\Target;
 
 /**
- * @brief %Log target that discards the message with no action.
+ * @brief %Log target that writes to a known variable.
  *
  * @details Used for testing.
  *
  * @author Christopher Evans <cmevans@tutanota.com>
  * @see Target
- * @date 15 November 2017
+ * @date 16 November 2017
  */
-final class Sink implements Target
+final class Variable implements Target
 {
+    private $message = '';
+
     /**
      * @see Target::emit
      */
     public function emit(string $message)
     {
-        // do nothing
+        $this->message = $message;
+    }
+
+    public function __toString()
+    {
+        return $this->message;
     }
 }

@@ -5,12 +5,9 @@ namespace West\Log\Target;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamFile;
-use Psr\Log\LogLevel;
-use West\Log\ServerFormat;
 use West\Log\Exception\InvalidArgumentException;
 use West\Log\Target\File as FileTarget;
 use PHPUnit\Framework\TestCase;
-use DateTime;
 
 class FileTest extends TestCase
 {
@@ -20,23 +17,15 @@ class FileTest extends TestCase
     /** @var $root vfsStreamFile Log file */
     private $logFile;
 
-    /** @var $logFormat ServerFormat Log format */
-    private $logFormat;
-
-    /** @var $logTime int Log time */
-    private $logTime;
-
     public function setUp()
     {
         $this->root = vfsStream::setup('test-directory');
         $this->logFile = vfsStream::newFile('test-directory/test.log');
-        $this->logFormat = new ServerFormat(DateTime::ISO8601, PHP_EOL);
-        $this->logTime = time();
     }
 
     public function testLogFileIsCreated()
     {
-        new FileTarget($this->logFile->url(), $this->logFormat);
+        new FileTarget($this->logFile->url());
 
         $this->assertTrue($this->root->hasChild('test.log'));
     }
@@ -49,7 +38,7 @@ class FileTest extends TestCase
         $this->root->chmod(0444);
         error_reporting(error_reporting() & E_USER_WARNING);
 
-        new FileTarget($this->logFile->url(), $this->logFormat);
+        new FileTarget($this->logFile->url());
     }
 
     public function testLogFileNotWritable()
@@ -60,20 +49,19 @@ class FileTest extends TestCase
             ->at($this->root)
             ->chmod(0555);
 
-        new FileTarget($this->logFile->url(), $this->logFormat);
+        new FileTarget($this->logFile->url());
     }
 
     public function testLogFileWritten()
     {
-        $logFormat = $this->logFormat;
+        $message = 'message';
 
-        $logFile = new FileTarget($this->logFile->url(), $logFormat);
+        $fileTarget = new FileTarget($this->logFile->url());
 
-        $logFile->log($this->logTime, LogLevel::NOTICE, 'message', []);
+        $fileTarget->emit($message);
 
-        $expectedLogValue = $logFormat->format($this->logTime, LogLevel::NOTICE, 'message');
         $writtenLogValue = file_get_contents($this->logFile->url());
 
-        $this->assertEquals($expectedLogValue, $writtenLogValue);
+        $this->assertEquals($message, $writtenLogValue);
     }
 }

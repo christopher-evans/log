@@ -3,11 +3,32 @@
 namespace West\Log;
 
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LogLevel;
 use West\Log\Exception\InvalidArgumentException;
 
 class MinLevelFilterTest extends TestCase
 {
+    /** @var $logLevels array Log levels */
+    private $logLevels;
+
+    /** @var $this->time \DateTimeInterface Log time */
+    private $time;
+
+    public function setUp()
+    {
+        $this->logLevels = [
+            'debug' => 0,
+            'info' => 1,
+            'notice' => 2,
+            'warning' => 3,
+            'error' => 4,
+            'critical' => 5,
+            'alert' => 6,
+            'emergency' => 7
+        ];
+        
+        $this->time = new \DateTime();
+    }
+
     /**
      * @param string $filterLevel String to be sluggified
      * @param string $logLevel What we expect our slug result to be
@@ -16,18 +37,17 @@ class MinLevelFilterTest extends TestCase
      */
     public function testLevelFails($filterLevel, $logLevel)
     {
-        $filter = new MinLevelFilter($filterLevel);
-        $time = time();
+        $filter = new MinLevelFilter($this->logLevels, $filterLevel);
 
-        $this->assertFalse($filter->filter($logLevel, $time));
+        $this->assertFalse($filter->filter($logLevel, $this->time));
     }
 
     public function providerTestLevelFails()
     {
         return [
-            [LogLevel::WARNING, LogLevel::DEBUG],
-            [LogLevel::WARNING, LogLevel::INFO],
-            [LogLevel::WARNING, LogLevel::NOTICE]
+            ['warning', 'debug'],
+            ['warning', 'info'],
+            ['warning', 'notice']
         ];
     }
 
@@ -39,20 +59,19 @@ class MinLevelFilterTest extends TestCase
      */
     public function testLevelPasses($filterLevel, $logLevel)
     {
-        $filter = new MinLevelFilter($filterLevel);
-        $time = time();
+        $filter = new MinLevelFilter($this->logLevels, $filterLevel);
 
-        $this->assertTrue($filter->filter($logLevel, $time));
+        $this->assertTrue($filter->filter($logLevel, $this->time));
     }
 
     public function providerTestLevelPasses()
     {
         return [
-            [LogLevel::WARNING, LogLevel::WARNING],
-            [LogLevel::WARNING, LogLevel::ERROR],
-            [LogLevel::WARNING, LogLevel::CRITICAL],
-            [LogLevel::WARNING, LogLevel::ALERT],
-            [LogLevel::WARNING, LogLevel::EMERGENCY]
+            ['warning', 'warning'],
+            ['warning', 'error'],
+            ['warning', 'critical'],
+            ['warning', 'alert'],
+            ['warning', 'emergency']
         ];
     }
 
@@ -60,15 +79,15 @@ class MinLevelFilterTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $filter = new MinLevelFilter(LogLevel::WARNING);
-        $time = time();
-        $filter->filter('not-a-real-error-level', $time);
+        $filter = new MinLevelFilter($this->logLevels, 'warning');
+
+        $filter->filter('not-a-real-error-level', $this->time);
     }
 
     public function testConstructException()
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new MinLevelFilter('not-a-real-error-level');
+        new MinLevelFilter($this->logLevels, 'not-a-real-error-level');
     }
 }

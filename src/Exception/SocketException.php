@@ -26,7 +26,7 @@ final class SocketException extends \RuntimeException
     {
         $socketErrorCode = socket_last_error();
         $socketErrorMessage = socket_strerror($socketErrorCode);
-        $errorMessage = $message . ' | ' . $socketErrorMessage;
+        $errorMessage = $message . ' : ' . $socketErrorMessage;
 
         parent::__construct($errorMessage, $socketErrorCode, $previous);
     }

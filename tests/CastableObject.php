@@ -8,24 +8,29 @@
  * file that was distributed with this source code.
  */
 
-namespace West\Log\Target;
+namespace West\Log;
 
 /**
- * @brief %Log target that discards the message with no action.
- *
- * @details Used for testing.
+ * @brief Object with known __toString value for testing.
  *
  * @author Christopher Evans <cmevans@tutanota.com>
- * @see Target
  * @date 15 November 2017
  */
-final class Sink implements Target
+final class CastableObject
 {
+    /** @var string $value String value */
+    private $value;
+
     /**
-     * @see Target::emit
+     * CastableObject constructor.
      */
-    public function emit(string $message)
+    public function __construct(string $value)
     {
-        // do nothing
+        $this->value = $value;
+    }
+
+    public function __toString()
+    {
+        return $this->value;
     }
 }

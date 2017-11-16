@@ -8,6 +8,7 @@ use West\Log\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use DateTime;
 use West\Log\UdpServer;
+use West\Log\Target\Udp as UdpTarget;
 
 class UdpTest extends TestCase
 {
@@ -32,7 +33,7 @@ class UdpTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new Udp('0.0.0.0', $port, $this->logFormat);
+        new UdpTarget('0.0.0.0', $port);
     }
 
     public function providerTestInvalidPort()
@@ -52,7 +53,7 @@ class UdpTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new Udp($ipAddress, 40, $this->logFormat);
+        new UdpTarget($ipAddress, 40);
     }
 
     public function providerTestInvalidIp()
@@ -64,64 +65,6 @@ class UdpTest extends TestCase
 
     /**
      * @param string $ipAddress IP address
-     *
-     * @dataProvider providerTestValidPortIp
-    public function testValidPortIp($ipAddress, $port)
-    {
-        //Reduce errors
-        error_reporting(~E_WARNING);
-
-        //Create a UDP socket
-        if(!($sock = socket_create(AF_INET, SOCK_DGRAM, 0)))
-        {
-            $errorcode = socket_last_error();
-            $errormsg = socket_strerror($errorcode);
-
-            die("Couldn't create socket: [$errorcode] $errormsg \n");
-        }
-
-        echo "Socket created \n";
-
-        // Bind the source address
-        if( !socket_bind($sock, "127.0.0.1" , 9999) )
-        {
-            $errorcode = socket_last_error();
-            $errormsg = socket_strerror($errorcode);
-
-            die("Could not bind socket : [$errorcode] $errormsg \n");
-        }
-
-        echo "Socket bind OK \n";
-
-        $udp = new Udp($ipAddress, $port, $this->logFormat);
-        $udp->log(time(), 'error', 'Message', []);
-
-
-        $r = socket_recvfrom($sock, $buf, 512, 0, $remote_ip, $remote_port);
-        echo "$remote_ip : $remote_port -- " . $buf;
-        socket_close($sock);
-        exit;
-
-        //Do some communication, this loop can handle multiple clients
-        while(1)
-        {
-            echo "Waiting for data ... \n";
-
-            //Receive some data
-            $r = socket_recvfrom($sock, $buf, 512, 0, $remote_ip, $remote_port);
-            echo "$remote_ip : $remote_port -- " . $buf;
-
-            //Send back the data to the client
-            socket_sendto($sock, "OK " . $buf , 100 , 0 , $remote_ip , $remote_port);
-        }
-
-        socket_close($sock);
-        exit;
-    }
-     */
-
-    /**
-     * @param string $ipAddress IP address
      * @param int $port Port
      *
      * @dataProvider providerTestValidPortIp
@@ -129,26 +72,21 @@ class UdpTest extends TestCase
     public function testValidPortIp($ipAddress, $port)
     {
         // log data
-        $logLevel = LogLevel::ALERT;
-        $logMessage = 'Message {context}';
-        $context = [
-            'context' => 'context'
-        ];
+        $message = 'message';
 
         // udp server
         $udpServer = new UdpServer($ipAddress, $port);
         $udpServer->open();
 
         // log
-        $udp = new Udp($ipAddress, $port, $this->logFormat);
-        $udp->log($this->logTime, $logLevel, $logMessage, $context);
+        $udp = new UdpTarget($ipAddress, $port);
+        $udp->emit($message);
 
         // read data
-        $logValue = $udpServer->read(49);
+        $logValue = $udpServer->read(7);
 
         // compare
-        $expectedLogValue = $this->logFormat->format($this->logTime, $logLevel, $logMessage, $context);
-        $this->assertEquals($expectedLogValue, $logValue);
+        $this->assertEquals($message, $logValue);
     }
 
     public function providerTestValidPortIp()
