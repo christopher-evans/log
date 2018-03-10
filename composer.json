@@ -42,6 +42,7 @@
     "metrics": "phpmetrics --report-html=./metrics ./src",
     "benchmark": "phpbench run --report=all --output=html_output",
     "cs-check": "phpcs --standard=phpcs.xml src/",
-    "cs-fix": "phpcbf --standard=phpcs.xml src/"
+    "cs-fix": "phpcbf --standard=phpcs.xml src/",
+    "upload-coverage": "php-coveralls -v"
   }
 }
