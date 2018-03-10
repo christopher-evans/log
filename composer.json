@@ -36,7 +36,8 @@
     }
   },
   "scripts": {
-    "test": "phpunit --coverage-html coverage/html",
+    "test": "phpunit --colors=always --coverage-html coverage/html",
+    "test-coverage": "phpunit --colors=always --coverage-clover coverage/logs/clover.xml",
     "docs": "doxygen ./Doxyfile",
     "metrics": "phpmetrics --report-html=./metrics ./src",
     "benchmark": "phpbench run --report=all --output=html_output",
