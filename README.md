@@ -1,8 +1,9 @@
 # West Log
 
-Master:
+### Master
 [![Build Status](https://travis-ci.org/christopher-evans/log.svg?branch=master)](https://travis-ci.org/christopher-evans/log)
 [![Coverage Status](https://coveralls.io/repos/github/christopher-evans/log/badge.svg)](https://coveralls.io/github/christopher-evans/log)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9709ef3f069c06f40e4c/maintainability)](https://codeclimate.com/github/christopher-evans/log/maintainability)
 
 ## Autoloading
 
