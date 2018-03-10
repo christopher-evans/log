@@ -36,7 +36,7 @@
     }
   },
   "scripts": {
-    "test": "phpunit --coverage-html coverage",
+    "test": "phpunit --coverage-html coverage/html",
     "docs": "doxygen ./Doxyfile",
     "metrics": "phpmetrics --report-html=./metrics ./src",
     "benchmark": "phpbench run --report=all --output=html_output",

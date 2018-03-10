@@ -66,8 +66,6 @@ class UdpServer
             throw new InvalidArgumentException(sprintf('Unable to read data: %s', $errorMessage));
         }
 
-        var_dump($bytes);
-
         return $buffer;
     }
 
