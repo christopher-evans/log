@@ -30,7 +30,7 @@ interface Expansion
      * parameters.
      *
      * @param string $message %Log message optionally containing tokens
-     * @param array $context Context parameters (or token values)
+     * @param array  $context Context parameters (or token values)
      *
      * @return string Expanded message
      */

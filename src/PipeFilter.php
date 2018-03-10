@@ -26,7 +26,6 @@ final class PipeFilter implements Filter
      */
     public function __construct()
     {
-
     }
 
     /**

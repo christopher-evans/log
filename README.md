@@ -83,7 +83,7 @@ and [Smalltalk][].  In particular:
 
   _An object manages it's own internal behavior, and works with other objects only through it's public interface.
   Extending a 'completed' class may break the logic of the parent class. Abstract classes themselves are normally
-  avoided.
+  avoided._
 
 - No getters and setters.
 

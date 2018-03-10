@@ -45,7 +45,7 @@ final class AggregateLog implements Log
     public function __construct(iterable $notifications)
     {
         foreach ($notifications as $notification) {
-            if (!$notification instanceof Notification) {
+            if (! $notification instanceof Notification) {
                 throw new Exception\InvalidArgumentException('Invalid notification.  Must implement Notification.');
             }
         }
