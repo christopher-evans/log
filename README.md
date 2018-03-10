@@ -1,5 +1,9 @@
 # West Log
 
+Master:
+[![Build Status](https://travis-ci.org/christopher-evans/log.svg?branch=master)](https://travis-ci.org/christopher-evans/log)
+[![Coverage Status](https://coveralls.io/repos/github/christopher-evans/log/badge.svg)](https://coveralls.io/github/christopher-evans/log)
+
 ## Autoloading
 
 This package is [PSR-4][] autoloadable via composer or otherwise mapping the `West\Log`
