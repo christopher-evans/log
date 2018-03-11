@@ -21,7 +21,6 @@ namespace West\Log;
  *
  * @author Christopher Evans <cmevans@tutanota.com>
  * @see Format
- * @see http://www.php-fig.org/psr/psr-3/
  * @date 18 March 2017
  */
 final class ServerFormat implements Format

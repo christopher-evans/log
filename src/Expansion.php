@@ -20,7 +20,6 @@ namespace West\Log;
  * </p>
  *
  * @author Christopher Evans <cmevans@tutanota.com>
- * @see http://www.php-fig.org/psr/psr-3/
  * @date 13 November 2017
  */
 interface Expansion

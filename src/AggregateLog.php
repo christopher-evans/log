@@ -18,10 +18,7 @@ namespace West\Log;
  *     A DefaultNotification comprises a {@link Target}, {@link Filter}, {@link Format} and {@link Expansion}.
  * </p>
  *
- * @TODO change the details above
- *
  * @author Christopher Evans <cmevans@tutanota.com>
- * @see http://www.php-fig.org/psr/psr-3/
  * @see West::Log::Log
  * @date 13 November 2017
  */

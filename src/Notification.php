@@ -19,7 +19,6 @@ namespace West\Log;
  * </p>
  *
  * @author Christopher Evans <cmevans@tutanota.com>
- * @see http://www.php-fig.org/psr/psr-3/
  * @date 8 October 2017
  */
 interface Notification
