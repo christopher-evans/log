@@ -94,7 +94,7 @@ template variables for the context parameter.
 
 ## Adding log targets
 
-The provides the `OutputStreamTarget` and `UdpTarget` log targets; other targets can be defined by the user.  This can
+The provides the `FileTarget` and `UdpTarget` log targets; other targets can be defined by the user.  This can
 be any class implementing the `Target` interface.
 
 A target receives a formatted and expanded string and adds add it to the log.
