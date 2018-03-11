@@ -25,7 +25,6 @@ namespace West\Log;
  *
  * @author Christopher Evans <cmevans@tutanota.com>
  * @see Expansion
- * @see http://www.php-fig.org/psr/psr-3/
  * @date 18 March 2017
  */
 final class StringExpansion implements Expansion
@@ -43,11 +42,6 @@ final class StringExpansion implements Expansion
      * @var string $lineSeparator
      */
     private $endDelimiter;
-
-    /**
-     * @var string $contextStringRegex Regex used to validate context keys
-     */
-    private static $invalidContextRegex = '/[^a-z0-9_\.]/i';
 
     /**
      * @brief Constructs a string expansion from a start and end delimiter wrapping each parameter.
@@ -80,13 +74,6 @@ final class StringExpansion implements Expansion
         // build a replacement array with braces around the context keys
         $replace = [];
         foreach ($context as $key => $val) {
-            // check the key is valid
-            if (preg_match(self::$invalidContextRegex, $key)) {
-                throw new Exception\InvalidArgumentException(
-                    'Context must contain only alphanumeric characters, \'_\' and \'.\''
-                );
-            }
-
             // check that the value can be cast to string
             if (! is_string($val) && (! is_object($val) || ! method_exists($val, '__toString'))) {
                 throw new Exception\InvalidArgumentException(
