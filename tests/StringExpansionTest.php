@@ -88,4 +88,43 @@ class StringExpansionTest extends TestCase
             ]
         ];
     }
+
+
+    /**
+     * @dataProvider providerTestInvalidContext
+     */
+    public function testInvalidContext($startDelimiter, $endDelimiter, $message, $context)
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $expansion = new StringExpansion($startDelimiter, $endDelimiter);
+
+        $expansion->expand($message, $context);
+    }
+
+    public function providerTestInvalidContext()
+    {
+        return [
+            [
+                '{',
+                '}',
+                'message {key}',
+                [
+                    'key' => [
+                        'array' => 'value-is-disallowed'
+                    ]
+                ]
+            ],
+            [
+                '{',
+                '}',
+                'message {key}',
+                [
+                    'key' => [
+                        'integer' => 'value-is-disallowed'
+                    ]
+                ]
+            ]
+        ];
+    }
 }
