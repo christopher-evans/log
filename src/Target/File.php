@@ -56,6 +56,8 @@ final class File implements Target
      */
     public function emit(string $message)
     {
-        file_put_contents($this->file, $message, FILE_APPEND);
+        if (file_put_contents($this->file, $message, FILE_APPEND) === false) {
+            throw new \Exception('Error writing to file');
+        }
     }
 }
