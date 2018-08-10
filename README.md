@@ -33,21 +33,20 @@ reports see the the [composer.json][] file and the [PHPBenchDocs][].
 
 ## Documentation
 
-This package is documented [here](./docs/index.md).  To generate the docs run
+This package is documented [here](https://christopher-evans.github.io/log/).  To generate the docs run
 run `composer install --no-dev`, ensure [MkDocs][] is installed and available
 as `doxygen` and run `composer docs`.
 
 
 ## Principles
 
-The aim of this package is to implement some of the principles of object oriented programming
-described in David West's [Object Thinking][].  Many of the ideas
-come from [Yegor Bugayenko][]'s distillations of West's book, and [Alan Kay][]'s comments on [Squeak][]
-and [Smalltalk][].  In particular:
+The aim of this package is to implement some of the principles of object oriented programming described in David West's
+[Object Thinking][].  Many of the ideas come from [Yegor Bugayenko][]'s writings about West's book, and [Alan Kay][]'s
+comments on [Squeak][] and [Smalltalk][].  In particular:
 
 - Everything is an object.
 
-  _Some exceptions are permitted, for example the introduction of resources, in part to compensate
+  _Some exceptions are permitted, for example the introduction of resources to compensate
   for the lack of OOP in earlier versions of the language, are allowed._
 
 - An object exists in real life.
@@ -75,24 +74,23 @@ and [Smalltalk][].  In particular:
 - There are no `null` values.
 
   _The special value `null` is not an instance of any class, and does not implement any (useful) interface. An object
-  that does not implement the interfaces expected of it's fellow class members does not exist.  One exception is
-  permitted: PHP only allows null to be used as the default value for an argument type-hinted as a class; in this case
-  a null default value may be used.  This allows multiple method signatures without duplicating code._
+  that does not implement the interfaces expected of it's class does not exist.  One exception is permitted: PHP only
+  allows null to be used as the default value for an argument type-hinted as a class; in this case a null default value
+  may be used.  This allows multiple method signatures without duplicating code._
 
 - A class does not have any static properties or methods.
 
-  _An application consists of objects interacting through interfaces, and classes are used to describe sets of objects, not
-  to implement logic for those objects._
+  _An application consists of objects interacting through interfaces, and classes are used to describe sets of objects,
+  not to implement logic for those objects._
 
-- A class is either abstract or final. Only abstract methods are protected.
+- A class is final.
 
   _An object manages it's own internal behavior, and works with other objects only through it's public interface.
-  Extending a 'completed' class may break the logic of the parent class. Abstract classes themselves are normally
-  avoided._
+  Extending a completed class may break the logic of the parent class._
 
 - No getters and setters.
 
-  _Objects are defined bey their behavior, not by their attributes.  Getters and setters are a shallow way of imitating
+  _Objects are defined by their behavior, not by their attributes.  Getters and setters are a shallow way of imitating
   data-based design as if it were a behavior of an object._
 
 
