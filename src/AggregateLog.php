@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -25,19 +25,19 @@ namespace West\Log;
 final class AggregateLog implements Log
 {
     /**
-     * @brief %Log targets
-     *
      * @var iterable $notifications
+     *
+     * @brief %Log targets
      */
     private $notifications;
 
     /**
      * Log constructor.
      *
-     * @param iterable $notifications An iterable class or array of notifications
+     * @param iterable $notifications An iterable class or array of notifications.
      *
      * @see Notification
-     * @throws Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException If an entry is not a notification.
      */
     public function __construct(iterable $notifications)
     {
@@ -51,9 +51,14 @@ final class AggregateLog implements Log
     }
 
     /**
-     * @see West::Log::Log::log
+     * @brief Add a log entry with a time, level, message and context parameters.
      *
-     * @throws Exception\AggregateException
+     * @param string             $level   Log level.
+     * @param string             $message Log message.
+     * @param array              $context Context parameters.
+     * @param \DateTimeInterface $time    Log time.
+     *
+     * @throws Exception\AggregateException If there was an error adding the entry to one of the targets.
      */
     public function log(string $level, string $message, array $context = [], \DateTimeInterface $time = null)
     {

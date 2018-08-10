@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>

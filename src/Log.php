@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -37,12 +37,12 @@ interface Log
     /**
      * @brief Add a log entry with a time, level, message and context parameters.
      *
-     * @param string $level Log level
-     * @param string $message Log message
-     * @param array $context Context parameters
-     * @param \DateTimeInterface $time Log time
+     * @param string             $level   Log level.
+     * @param string             $message Log message.
+     * @param array              $context Context parameters.
+     * @param \DateTimeInterface $time    Log time.
      *
-     * @throws \Exception
+     * @throws \Exception If there was an error adding the entry to the log.
      */
     public function log(string $level, string $message, array $context = [], \DateTimeInterface $time = null);
 }

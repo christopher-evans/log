@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -28,6 +28,8 @@ namespace West\Log;
 final class DefaultNotification implements Notification
 {
     /**
+     * @var Target\Target $target
+     *
      * @brief %Log target
      * @see UdpTarget
      * @see OutputStreamTarget
@@ -35,18 +37,24 @@ final class DefaultNotification implements Notification
     private $target;
 
     /**
+     * @var Expansion $expansion
+     *
      * @brief Message expansion.
      * @see StringExpansion
      */
     private $expansion;
 
     /**
+     * @var Format $format
+     *
      * @brief %Log entry format.
      * @see ServerFormat
      */
     private $format;
 
     /**
+     * @var Filter $filter
+     *
      * @brief %Log entry filter.
      * @see LevelFilter
      * @see PipeFilter
@@ -56,10 +64,10 @@ final class DefaultNotification implements Notification
     /**
      * @brief Construct a DefaultNotification from a target, expansion, format and filter.
      *
-     * @param Target\Target $target Log target
-     * @param Expansion $expansion Message expansion
-     * @param Format $format Log entry format
-     * @param Filter $filter Log entry filter
+     * @param Target\Target $target    Log target.
+     * @param Expansion     $expansion Message expansion.
+     * @param Format        $format    Log entry format.
+     * @param Filter        $filter    Log entry filter.
      */
     public function __construct(
         Target\Target $target,

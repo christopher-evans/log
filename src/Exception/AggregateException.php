@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -25,23 +25,38 @@ namespace West\Log\Exception;
  */
 final class AggregateException extends \Exception implements \IteratorAggregate, \Countable
 {
+    /**
+     * @var array $exceptions
+     */
     private $exceptions = [];
 
-    public function __construct($message = '', $code = 0, \Throwable $previous = null)
-    {
-        parent::__construct($message, $code, $previous);
-    }
-
+    /**
+     * Get an iterator over the aggregated exceptions.
+     *
+     * @return \Iterator The iterator.
+     * @see \IteratorAggregate
+     */
     public function getIterator(): \Iterator
     {
         return new \ArrayIterator($this->exceptions);
     }
 
+    /**
+     * Add an exception to the aggregate.
+     *
+     * @param \Exception $exception Exception.
+     */
     public function addException(\Exception $exception)
     {
         $this->exceptions[] = $exception;
     }
 
+    /**
+     * Get the total number of exceptions.
+     *
+     * @return int
+     * @see \Iterator
+     */
     public function count()
     {
         return count($this->exceptions);

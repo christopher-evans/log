@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -37,33 +37,34 @@ use West\Log\Exception\SocketException;
 final class Udp implements Target
 {
     /**
-     * @brief UDP socket.
-     *
      * @var resource $socket
+     *
+     * @brief UDP socket.
      */
     private $socket;
 
     /**
-     * @brief UDP server IP address.
-     *
      * @var string $ipAddress
+     *
+     * @brief UDP server IP address.
      */
     private $ipAddress;
 
     /**
-     * @brief UDP server port.
-     *
      * @var int $port
+     *
+     * @brief UDP server port.
      */
     private $port;
 
     /**
      * File constructor.
      *
-     * @param string $ipAddress IP Address
-     * @param int $port Port
+     * @param string $ipAddress IP Address.
+     * @param int    $port      Port.
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException If the IP address or port is invalid.
+     * @throws SocketException If the socket cannot be created.
      */
     public function __construct(string $ipAddress, int $port)
     {

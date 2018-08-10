@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -25,9 +25,9 @@ interface Target
     /**
      * Send a formatted log entry.
      *
-     * @param string $message Formatted log entry
+     * @param string $message Formatted log entry.
      *
-     * @throws \Exception
+     * @throws \Exception If there was an error sending the message to the target.
      */
     public function emit(string $message);
 }

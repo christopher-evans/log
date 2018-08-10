@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -25,9 +25,9 @@ use West\Log\Exception\InvalidArgumentException;
 final class File implements Target
 {
     /**
-     * @brief File path.
-     *
      * @var string $file
+     *
+     * @brief File path.
      */
     private $file;
 
@@ -36,7 +36,7 @@ final class File implements Target
      *
      * @param string $file File path. Should be absolute.
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException If the file cannot be created or is not writable.
      */
     public function __construct(string $file)
     {

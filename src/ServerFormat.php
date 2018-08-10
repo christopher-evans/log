@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -26,16 +26,18 @@ namespace West\Log;
 final class ServerFormat implements Format
 {
     /**
+     * @var string $dateFormat
+     *
      * @brief Separator between log entries.
      * @details Passed to the PHP `date` function
-     * @var string $dateFormat
      */
     private $dateFormat;
 
     /**
+     * @var string $lineSeparator
+     *
      * @brief Line separator
      * @details PHP_EOL is a sensible value
-     * @var string $lineSeparator
      */
     private $lineSeparator;
 
@@ -44,8 +46,8 @@ final class ServerFormat implements Format
      *
      * @details Construct a {@link ServerFormat} from a {@link DateFormat} and a line separator string.
      *
-     * @param string $dateFormat Date format
-     * @param string $lineSeparator Line separator
+     * @param string $dateFormat    Date format.
+     * @param string $lineSeparator Line separator.
      */
     public function __construct(string $dateFormat, string $lineSeparator)
     {

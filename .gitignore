@@ -4,8 +4,8 @@
 # phpunit code coverage report
 /coverage
 
-# doxygen output
-/doxygen
+# mkdocs output
+/site
 
 # php metrics
 /metrics

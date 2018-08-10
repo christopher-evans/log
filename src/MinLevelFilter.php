@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -29,24 +29,24 @@ namespace West\Log;
 final class MinLevelFilter implements Filter
 {
     /**
-     * @brief Minimum severity that passes the filter
-     *
      * @var int $minLevelOrder
+     *
+     * @brief Minimum severity that passes the filter
      */
     private $minLevelOrder;
 
     /**
-     * @brief Map from log levels to severity
-     *
      * @var array $levelOrder
+     *
+     * @brief Map from log levels to severity
      */
     private $levelOrder;
 
     /**
      * MinLevelFilter constructor.
      *
-     * @param array $levelOrder Map from log levels to severity
-     * @param string $minLevel Minimum log level that will pass the filter
+     * @param array  $levelOrder Map from log levels to severity.
+     * @param string $minLevel   Minimum log level that will pass the filter.
      */
     public function __construct(array $levelOrder, string $minLevel)
     {
@@ -67,11 +67,11 @@ final class MinLevelFilter implements Filter
     /**
      * @brief Map a log level to an integer indicating severity.
      *
-     * @param string $level %Log level
+     * @param string $level Log level.
      *
      * @return int Severity of log level
      *
-     * @throws West::Log::Exception::InvalidArgumentException
+     * @throws Exception\InvalidArgumentException If the level is not found.
      */
     private function getLevelOrder(string $level)
     {

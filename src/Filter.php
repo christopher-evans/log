@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -26,8 +26,8 @@ interface Filter
     /**
      * @brief Determine if a level should be logged.
      *
-     * @param string $level %Log level
-     * @param \DateTimeInterface $time %Time stamp of the log entry
+     * @param string             $level Log level.
+     * @param \DateTimeInterface $time  Time stamp of the log entry.
      *
      * @return bool Return true if the level should be logged.
      */

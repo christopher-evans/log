@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -22,6 +22,12 @@ namespace West\Log\Exception;
  */
 final class SocketException extends \RuntimeException
 {
+    /**
+     * SocketException constructor.
+     *
+     * @param string          $message  Error message.
+     * @param \Throwable|null $previous Previous error.
+     */
     public function __construct(string $message = '', \Throwable $previous = null)
     {
         $socketErrorCode = socket_last_error();

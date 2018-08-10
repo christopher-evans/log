@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -28,8 +28,8 @@ interface Expansion
      * @brief Expand a string containing parameter tokens (defined by the user in an implementation) using context
      * parameters.
      *
-     * @param string $message %Log message optionally containing tokens
-     * @param array  $context Context parameters (or token values)
+     * @param string $message Log message optionally containing tokens.
+     * @param array  $context Context parameters (or token values).
      *
      * @return string Expanded message
      */

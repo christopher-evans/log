@@ -1,0 +1,31 @@
+site_name: 'West PHP Log'
+site_description: 'PHP Log implementation'
+copyright: '(c) Chris Evans <cmevans@tutanota.com>'
+repo_url: 'https://github.com/christopher-evans/log'
+nav:
+- Quick start: 'index.md'
+theme:
+  name: 'material'
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.smartsymbols
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - codehilite:
+      linenums: true
+  - pymdownx.highlight:
+      guess_lang: true
+      extend_pygments_lang:
+      - name: php
+        lang: php
+        options:
+          startinline: true
+  - pymdownx.superfences:
+      css_class: codehilite
+  - pymdownx.inlinehilite:
+      css_class: codehilite
+
+extra_css:
+- css/extra.css

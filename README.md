@@ -34,7 +34,7 @@ reports see the the [composer.json][] file and the [PHPBenchDocs][].
 ## Documentation
 
 This package is documented [here](./docs/index.md).  To generate the docs run
-run `composer install --no-dev`, ensure [Doxygen][] is installed and available
+run `composer install --no-dev`, ensure [MkDocs][] is installed and available
 as `doxygen` and run `composer docs`.
 
 
@@ -100,7 +100,7 @@ and [Smalltalk][].  In particular:
 [PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
 [PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
 [Composer]: http://getcomposer.org/
-[Doxygen]: http://www.stack.nl/~dimitri/doxygen/
+[MkDocs]: https://www.mkdocs.org/
 [PHPUnit]: http://phpunit.de/
 [PHPBench]: https://github.com/phpbench/phpbench
 [PHPBenchDocs]: http://phpbench.readthedocs.io/en/latest/

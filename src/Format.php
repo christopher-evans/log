@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -26,9 +26,9 @@ interface Format
     /**
      * Format a log entry.
      *
-     * @param \DateTimeInterface $time Time stamp for the log entry
-     * @param string $level %Log severity level
-     * @param string $message Log message. This message has been interpolated by an {@link Expansion}.
+     * @param string             $level   Log severity level.
+     * @param string             $message Log message. This message has been interpolated by an {@link Expansion}.
+     * @param \DateTimeInterface $time    Time stamp for the log entry.
      *
      * @return string Formatted log entry
      */

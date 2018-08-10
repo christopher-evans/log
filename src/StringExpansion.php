@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the West\\Log package
  *
  * (c) Chris Evans <cmevans@tutanota.com>
@@ -30,26 +30,28 @@ namespace West\Log;
 final class StringExpansion implements Expansion
 {
     /**
+     * @var string $lineSeparator
+     *
      * @brief Message parameter start delimiter
      * @details E.g. '{'
-     * @var string $lineSeparator
      */
     private $startDelimiter;
 
     /**
+     * @var string $lineSeparator
+     *
      * @brief Message parameter end delimiter
      * @details E.g. '}'
-     * @var string $lineSeparator
      */
     private $endDelimiter;
 
     /**
      * @brief Constructs a string expansion from a start and end delimiter wrapping each parameter.
      *
-     * @param string $startDelimiter Message parameter start delimiter
-     * @param string $endDelimiter Message parameter end delimiter
+     * @param string $startDelimiter Message parameter start delimiter.
+     * @param string $endDelimiter   Message parameter end delimiter.
      *
-     * @throws West::Log::Exception::InvalidArgumentException
+     * @throws Exception\InvalidArgumentException If the start or end delimeters are empty.
      */
     public function __construct(string $startDelimiter, string $endDelimiter)
     {
